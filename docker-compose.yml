@@ -1,0 +1,49 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+    - '80:80'
+    - '443:443'
+    volumes:
+    - ./app:/app
+    - ./docker/nginx/confs:/etc/nginx/conf.d
+    - ./docker/nginx/certs/app-selfsigned.crt:/etc/ssl/certs/app-selfsigned.crt
+    - ./docker/nginx/certs/app-selfsigned.key:/etc/ssl/private/app-selfsigned.key
+    networks:
+    - frontend
+    - backend
+    restart: always
+  core:
+    build: ./docker/php/
+    volumes:
+    - ./app:/app
+    networks:
+    - backend
+    restart: always
+  mysql:
+    image: mysql/mysql-server
+    environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_DATABASE=survey
+    - MYSQL_ROOT_HOST=%
+    volumes:
+    - ./docker/mysql/my.cnf:/etc/my.cnf
+    ports:
+    - 3306:3306
+    networks:
+    - backend
+  # docker manager UI
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - portainer_data:/data
+    ports:
+    - '9000:9000'
+networks:
+  frontend:
+  backend:
+volumes:
+  portainer_data:
