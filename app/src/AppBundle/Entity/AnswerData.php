@@ -42,7 +42,7 @@ class AnswerData
     private $text;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionItem", mappedBy="")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionItem", mappedBy="answer")
      */
     private $item;
 
