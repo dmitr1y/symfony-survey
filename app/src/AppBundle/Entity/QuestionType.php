@@ -30,9 +30,9 @@ class QuestionType
     private $name;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
 
@@ -83,7 +83,7 @@ class QuestionType
     /**
      * Set type
      *
-     * @param integer $type
+     * @param string $type
      *
      * @return QuestionType
      */
@@ -97,7 +97,7 @@ class QuestionType
     /**
      * Get type
      *
-     * @return int
+     * @return string
      */
     public function getType()
     {
