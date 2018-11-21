@@ -26,7 +26,7 @@ class TestController extends Controller
 
         $tests = $em->getRepository('AppBundle:Test')->findAll();
 
-        return $this->render('test/index.html.twig', array(
+        return $this->render('@App/`test/index.html.twig', array(
             'tests' => $tests,
         ));
     }
