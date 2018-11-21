@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Test;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Test controller.
@@ -26,7 +28,7 @@ class TestController extends Controller
 
         $tests = $em->getRepository('AppBundle:Test')->findAll();
 
-        return $this->render('@App/`test/index.html.twig', array(
+        return $this->render('@App/test/index.html.twig', array(
             'tests' => $tests,
         ));
     }
@@ -41,8 +43,9 @@ class TestController extends Controller
     {
         $test = new Test();
         $form = $this->createForm('AppBundle\Form\TestType', $test);
-        $form->handleRequest($request);
+        $form->add('submit', SubmitType::class);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $test->setCreatedAt(new \DateTime());
             $test->setEndTime(new \DateTime());

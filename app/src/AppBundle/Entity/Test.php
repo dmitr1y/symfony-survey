@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -257,6 +258,26 @@ class Test
     public function getOwnerId()
     {
         return $this->ownerId;
+    }
+
+    /**
+     * Get questions
+     *
+     * @param Collection $questions
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+    }
+
+    /**
+     * Set questions
+     *
+     * @return Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
     }
 }
 

@@ -2,7 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Answer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,13 @@ class QuestionItemType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('qiOrder')->add('question')->add('answer');
+        $builder
+            ->add('name')
+            ->add('qiOrder')
+            ->add('question')
+            ->add('answer', CollectionType::class, [
+                'entry_type' => AnswerType::class,
+            ]);
     }/**
      * {@inheritdoc}
      */

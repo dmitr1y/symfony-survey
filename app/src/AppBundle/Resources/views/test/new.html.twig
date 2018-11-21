@@ -1,16 +1,38 @@
 {% extends '@App/layout.html.twig' %}
 
 {% block body %}
-    <h1>Test creation</h1>
+    <div class="container">
+        <h1>Test creation</h1>
+        {{ form_start(form) }}
+        {# ... #}
+        {{ form_row(form.name) }}
+        {{ form_row(form.isActive) }}
+        {{ form_row(form.startTime) }}
+        {#{{ form_widget(form) }}#}
+        {# store the prototype on the data-prototype attribute #}
+        <ul id="questions-list"
+            data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}"
+            data-widget-tags="{{ '<li></li>'|e }}">
+            {% for question in form.questions %}
+                <li>
+                    {{ form_errors(question) }}
+                    {{ form_widget(question) }}
+                </li>
+            {% endfor %}
+        </ul>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        <button type="button"
+                class="add-another-collection-widget btn btn-info"
+                data-list="#questions-list">Add new question
+        </button>
 
-    <ul>
-        <li>
-            <a href="{{ path('test_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_end(form) }}
+
+
+        <ul>
+            <li>
+                <a href="{{ path('test_index') }}">Back to the list</a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}

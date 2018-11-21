@@ -13,7 +13,7 @@ class AnswerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('userId')->add('createdAt')->add('question');
+        $builder->add('question');
     }/**
      * {@inheritdoc}
      */

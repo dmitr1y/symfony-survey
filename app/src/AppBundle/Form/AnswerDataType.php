@@ -13,7 +13,10 @@ class AnswerDataType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text')->add('answer')->add('rightAnswer');
+        $builder
+            ->add('text')
+            ->add('answer')
+            ->add('rightAnswer');
     }/**
      * {@inheritdoc}
      */

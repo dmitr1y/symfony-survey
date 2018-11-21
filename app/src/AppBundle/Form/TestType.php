@@ -18,13 +18,13 @@ class TestType extends AbstractType
             ->add('name')
             ->add('isActive')
             ->add('startTime')
-            ->add('endTime');
-
-        $builder->add('questions', CollectionType::class,
-            [
-                'entry_type' => QuestionType::class,
-                'entry_options' => array('label' => false),
-            ]);
+            ->add('endTime')
+            ->add('questions', CollectionType::class,
+                [
+                    'entry_type' => QuestionType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                ]);
     }
 
     /**
