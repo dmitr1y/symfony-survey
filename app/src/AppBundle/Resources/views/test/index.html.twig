@@ -1,0 +1,51 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+    <h1>Tests list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Isactive</th>
+                <th>Starttime</th>
+                <th>Endtime</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Ownerid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test in tests %}
+            <tr>
+                <td><a href="{{ path('test_show', { 'id': test.id }) }}">{{ test.id }}</a></td>
+                <td>{{ test.name }}</td>
+                <td>{% if test.isActive %}Yes{% else %}No{% endif %}</td>
+                <td>{% if test.startTime %}{{ test.startTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if test.endTime %}{{ test.endTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if test.createdAt %}{{ test.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if test.updatedAt %}{{ test.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ test.ownerId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('test_show', { 'id': test.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('test_edit', { 'id': test.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('test_new') }}">Create a new test</a>
+        </li>
+    </ul>
+{% endblock %}

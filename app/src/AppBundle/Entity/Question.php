@@ -35,6 +35,8 @@ class Question
      */
     private $type;
 
+
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Test", inversedBy="questions")
      */
@@ -103,30 +105,6 @@ class Question
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Question
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
