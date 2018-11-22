@@ -3,31 +3,25 @@
 {% block body %}
     <div class="container">
         <h1>Test creation</h1>
+        {% form_theme form
+            '@App/collections/jquery.collection.html.twig' %}
         {{ form_start(form) }}
-        {# ... #}
         {{ form_row(form.name) }}
         {{ form_row(form.isActive) }}
         {{ form_row(form.startTime) }}
-        {#{{ form_widget(form) }}#}
-        {# store the prototype on the data-prototype attribute #}
-        <ul id="questions-list"
-            data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}"
-            data-widget-tags="{{ '<li></li>'|e }}">
-            {% for question in form.questions %}
-                <li>
-                    {{ form_errors(question) }}
-                    {{ form_widget(question) }}
-                </li>
-            {% endfor %}
-        </ul>
-
-        <button type="button"
-                class="add-another-collection-widget btn btn-info"
-                data-list="#questions-list">Add new question
-        </button>
-
+        {{ form_row(form.endTime) }}
+        <hr>
+        <div class="row">
+            <div class="col">
+                {% form_theme form.questions
+                    '@App/collections/jquery.collection.html.twig'
+                    '@App/collections/advanced.jquery.collection.html.twig' %}
+                {{ form_row(form.questions) }}
+            </div>
+        </div>
+        <hr>
+        {{ form_widget(form) }}
         {{ form_end(form) }}
-
 
         <ul>
             <li>
@@ -35,4 +29,25 @@
             </li>
         </ul>
     </div>
+    <script type="text/javascript">
+        $('.questions').collection({
+            position_field_selector: '.question-position',
+            // allow_duplicate: true,
+            up: '<a href="#" class="btn btn-default"><i class="fas fa-arrow-up"></i></a>',
+            down: '<a href="#" class="btn btn-default"><i class="fas fa-arrow-down"></i></a>',
+            add: '<a href="#" class="btn btn-default"><i class="fas fa-plus"></i>Добавить вопрос</a>',
+            remove: '<a href="#" class="btn btn-default"><i class="fas fa-trash"></i></a>',
+            prefix: 'parent',
+            children: [{
+                selector: '.question_items',
+                position_field_selector: '.answer-position',
+                // allow_duplicate: true,
+                prefix: 'qi_child',
+                children: [{
+                    selector: '.answer_text',
+                    prefix: 'qi_child',
+                }],
+            }]
+        });
+    </script>
 {% endblock %}

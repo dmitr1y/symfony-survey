@@ -24,6 +24,10 @@ class TestType extends AbstractType
                     'entry_type' => QuestionType::class,
                     'allow_add' => true,
                     'allow_delete' => true,
+                    'prototype' => true,
+                    'attr' => array(
+                        'class' => 'questions',
+                    ),
                 ]);
     }
 

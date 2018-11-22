@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/brands.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/solid.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -45,15 +48,20 @@
         </form>
     </div>
 </nav>
-
-<main role="main" class="container">
-    {% block body %} {% endblock %}
-</main>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ asset('bundles/app/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('bundles/app/js/popper.js') }}"></script>
 <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/app/js/jquery.collection.js') }}"></script>
 <script src="{{ asset('bundles/app/js/add-collection-widget.js') }}"></script>
+<script src="{{ asset('bundles/app/js/all.js') }}"></script>
+<script src="{{ asset('bundles/app/js/brands.js') }}"></script>
+<script src="{{ asset('bundles/app/js/solid.js') }}"></script>
+
+<main role="main" class="container">
+    {% block body %} {% endblock %}
+</main>
+
 </body>
 </html>

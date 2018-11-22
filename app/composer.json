@@ -22,6 +22,7 @@
     "doctrine/orm": "^2.4.8",
     "friendsofsymfony/user-bundle": "~2.0",
     "incenteev/composer-parameter-handler": "~2.0",
+    "ninsuo/symfony-collection": "^2.1",
     "paragonie/random_compat": "^2.0",
     "sensio/distribution-bundle": "~4.0",
     "sensio/framework-extra-bundle": "^3.0.2",
@@ -44,10 +45,12 @@
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ],
     "post-install-cmd": [
-      "@symfony-scripts"
+      "@symfony-scripts",
+      "Fuz\\Symfony\\Collection\\ScriptHandler::postInstall"
     ],
     "post-update-cmd": [
-      "@symfony-scripts"
+      "@symfony-scripts",
+      "Fuz\\Symfony\\Collection\\ScriptHandler::postUpdate"
     ]
   },
   "config": {
