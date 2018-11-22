@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questiontype</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ questionType.id }}</td>
+            </tr>
+            <tr>
+                <th>Checkbox</th>
+                <td>{% if questionType.checkbox %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Radio</th>
+                <td>{% if questionType.radio %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{% if questionType.text %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('test_types_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('test_types_edit', { 'id': questionType.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

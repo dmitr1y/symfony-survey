@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questiontypes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Checkbox</th>
+                <th>Radio</th>
+                <th>Text</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionType in questionTypes %}
+            <tr>
+                <td><a href="{{ path('test_types_show', { 'id': questionType.id }) }}">{{ questionType.id }}</a></td>
+                <td>{% if questionType.checkbox %}Yes{% else %}No{% endif %}</td>
+                <td>{% if questionType.radio %}Yes{% else %}No{% endif %}</td>
+                <td>{% if questionType.text %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('test_types_show', { 'id': questionType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('test_types_edit', { 'id': questionType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('test_types_new') }}">Create a new questionType</a>
+        </li>
+    </ul>
+{% endblock %}
