@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Poll;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Questions;
+use AppBundle\Repository\QuestionsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Poll controller.
@@ -36,6 +39,8 @@ class PollController extends Controller
      *
      * @Route("/new", name="poll_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -44,8 +49,14 @@ class PollController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $poll->setOwnerId($user->getId());
             $em = $this->getDoctrine()->getManager();
             $em->persist($poll);
+//            dump($poll);
+//            die();
+//            $em->persist($poll->getQuestions());
             $em->flush();
 
             return $this->redirectToRoute('poll_show', array('id' => $poll->getId()));
@@ -66,7 +77,12 @@ class PollController extends Controller
     public function showAction(Poll $poll)
     {
         $deleteForm = $this->createDeleteForm($poll);
+        $em = $this->getDoctrine()->getManager();
+        $poll=$em->getRepository(Poll::class)->find($poll);
+//        $poll->setQuestions($questions);
 
+        dump($poll);
+        die();
         return $this->render('@App/poll/show.html.twig', array(
             'poll' => $poll,
             'delete_form' => $deleteForm->createView(),
@@ -130,7 +146,6 @@ class PollController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('poll_delete', array('id' => $poll->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

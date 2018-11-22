@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * Questions
@@ -22,9 +24,12 @@ class Questions
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Poll", inversedBy="questions", cascade={"persist"})
+     */
+    private $question;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuestionTypes", inversedBy="questionId", cascade={"persist", "remove"})
      */
     private $type;
 
@@ -36,19 +41,42 @@ class Questions
     private $text;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="valid_answer", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ValidAnswer", mappedBy="question", cascade={"persist", "remove"})
      */
     private $validAnswer;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="question_items", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionItems", mappedBy="question", cascade={"persist", "remove"})
      */
     private $questionItems;
 
+    public function __construct()
+    {
+        $this->questionItems = new ArrayCollection();
+        $this->validAnswer = new ArrayCollection();
+    }
+
+    /**
+     * Get question
+     *
+     * @return Collection
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set question
+     *
+     * @param Collection $question
+     * @return Questions
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+        return $this;
+    }
 
     /**
      * Get id
@@ -111,7 +139,7 @@ class Questions
     /**
      * Set validAnswer
      *
-     * @param string $validAnswer
+     * @param Collection $validAnswer
      *
      * @return Questions
      */
@@ -125,7 +153,7 @@ class Questions
     /**
      * Get validAnswer
      *
-     * @return string
+     * @return ArrayCollection
      */
     public function getValidAnswer()
     {
@@ -135,7 +163,7 @@ class Questions
     /**
      * Set questionItems
      *
-     * @param string $questionItems
+     * @param ArrayCollection $questionItems
      *
      * @return Questions
      */
@@ -149,7 +177,7 @@ class Questions
     /**
      * Get questionItems
      *
-     * @return string
+     * @return ArrayCollection
      */
     public function getQuestionItems()
     {

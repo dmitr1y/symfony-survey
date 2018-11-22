@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Proxies\__CG__\AppBundle\Entity\Question;
 
 /**
  * ValidAnswer
@@ -22,9 +23,7 @@ class ValidAnswer
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="question", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="validAnswer")
      */
     private $question;
 
@@ -49,7 +48,7 @@ class ValidAnswer
     /**
      * Set question
      *
-     * @param string $question
+     * @param Question $question
      *
      * @return ValidAnswer
      */
@@ -63,7 +62,7 @@ class ValidAnswer
     /**
      * Get question
      *
-     * @return string
+     * @return Question
      */
     public function getQuestion()
     {

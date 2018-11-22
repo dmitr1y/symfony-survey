@@ -22,27 +22,39 @@ class QuestionTypes
     private $id;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="checkbox", type="boolean", nullable=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $checkbox;
+    private $name;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="radio", type="boolean", nullable=true)
+     * @ORM\Column(name="tag", type="string", length=255)
      */
-    private $radio;
+    private $tag;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="text", type="boolean", nullable=true)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="type")
      */
-    private $text;
+    private $questionId;
 
+    /**
+     * @return Questions
+     */
+    public function getQuestionId(){
+        return $this->questionId;
+    }
 
+    /**
+     * @param $questionId
+     * @return QuestionTypes
+     */
+    public function setQuestionid($questionId){
+        $this->questionId=$questionId;
+        return $this;
+    }
     /**
      * Get id
      *
@@ -54,75 +66,51 @@ class QuestionTypes
     }
 
     /**
-     * Set checkbox
+     * Set name
      *
-     * @param boolean $checkbox
+     * @param string $name
      *
      * @return QuestionTypes
      */
-    public function setCheckbox($checkbox)
+    public function setName($name)
     {
-        $this->checkbox = $checkbox;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get checkbox
+     * Get name
      *
-     * @return bool
+     * @return string
      */
-    public function getCheckbox()
+    public function getName()
     {
-        return $this->checkbox;
+        return $this->name;
     }
 
     /**
-     * Set radio
+     * Set tag
      *
-     * @param boolean $radio
+     * @param string $tag
      *
      * @return QuestionTypes
      */
-    public function setRadio($radio)
+    public function setTag($tag)
     {
-        $this->radio = $radio;
+        $this->tag = $tag;
 
         return $this;
     }
 
     /**
-     * Get radio
+     * Get tag
      *
-     * @return bool
+     * @return string
      */
-    public function getRadio()
+    public function getTag()
     {
-        return $this->radio;
-    }
-
-    /**
-     * Set text
-     *
-     * @param boolean $text
-     *
-     * @return QuestionTypes
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-
-        return $this;
-    }
-
-    /**
-     * Get text
-     *
-     * @return bool
-     */
-    public function getText()
-    {
-        return $this->text;
+        return $this->tag;
     }
 }
 

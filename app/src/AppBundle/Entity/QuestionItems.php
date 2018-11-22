@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Proxies\__CG__\AppBundle\Entity\Question;
 
 /**
  * QuestionItems
@@ -22,9 +23,7 @@ class QuestionItems
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="question", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="questionItems", cascade={"persist"})
      */
     private $question;
 
@@ -49,7 +48,7 @@ class QuestionItems
     /**
      * Set question
      *
-     * @param string $question
+     * @param Question $question
      *
      * @return QuestionItems
      */
@@ -63,7 +62,7 @@ class QuestionItems
     /**
      * Get question
      *
-     * @return string
+     * @return Question
      */
     public function getQuestion()
     {

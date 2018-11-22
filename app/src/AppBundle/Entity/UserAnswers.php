@@ -22,9 +22,7 @@ class UserAnswers
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="valid_answer", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ValidAnswer", inversedBy="id")
      */
     private $validAnswer;
 
@@ -49,7 +47,7 @@ class UserAnswers
     /**
      * Set validAnswer
      *
-     * @param string $validAnswer
+     * @param ValidAnswer $validAnswer
      *
      * @return UserAnswers
      */
@@ -63,7 +61,7 @@ class UserAnswers
     /**
      * Get validAnswer
      *
-     * @return string
+     * @return ValidAnswer
      */
     public function getValidAnswer()
     {

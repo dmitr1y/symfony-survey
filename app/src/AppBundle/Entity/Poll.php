@@ -2,7 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Poll
@@ -43,12 +46,17 @@ class Poll
     private $ownerId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="questions", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="question", cascade={"persist", "remove"})
+     *  @ORM\JoinColumn(name="questions", referencedColumnName="id")
      */
     private $questions;
 
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+        $this->createdAt= new \DateTime();
+    }
 
     /**
      * Get id
@@ -135,7 +143,7 @@ class Poll
     /**
      * Set questions
      *
-     * @param string $questions
+     * @param ArrayCollection $questions
      *
      * @return Poll
      */
@@ -149,7 +157,7 @@ class Poll
     /**
      * Get questions
      *
-     * @return string
+     * @return ArrayCollection
      */
     public function getQuestions()
     {

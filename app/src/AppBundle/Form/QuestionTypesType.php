@@ -6,24 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AnswerDataType extends AbstractType
+class QuestionTypesType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('text')
-            ->add('answer')
-            ->add('rightAnswer');
+        $builder->add('name')->add('tag');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\AnswerData'
+            'data_class' => 'AppBundle\Entity\QuestionTypes'
         ));
     }
 
@@ -32,7 +29,7 @@ class AnswerDataType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_answerdata';
+        return 'appbundle_questiontypes';
     }
 
 

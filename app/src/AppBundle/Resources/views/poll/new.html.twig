@@ -1,16 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/layout.html.twig' %}
+
 
 {% block body %}
     <h1>Poll creation</h1>
-
-    {{ form_start(form) }}
+    {% form_theme form '@App/collections/main.collection.html.twig'%}
+    {% form_theme form.questions '@App/collections/questions.collection.html.twig'%}
+    <div class="col col-md">
+        {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        <div class="row">
+            {{ form_row(form.questions) }}
+        </div>
 
+        {{ form_end(form) }}
+    </div>
     <ul>
         <li>
             <a href="{{ path('poll_index') }}">Back to the list</a>
         </li>
     </ul>
+
 {% endblock %}
+
+{% block js_scripts %}
+    <script src="{{ asset('bundles/app/js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.test_questions').collection({
+            up: '<a href="#" class="btn btn-default"><i class="fas fa-arrow-up"></i></a>',
+            down: '<a href="#" class="btn btn-default"><i class="fas fa-arrow-down"></i></a>',
+            add: '<a href="#" class="btn btn-default"><i class="fas fa-plus"></i>Добавить вопрос</a>',
+            remove: '<a href="#" class="btn btn-default"><i class="fas fa-trash"></i></a>',
+            allow_up: false,
+            prefix: 'parent',
+            allow_down: false,
+            children: [{
+                selector: '.questions_item',
+                add: '<a href="#" class="btn btn-default"><i class="fas fa-plus"></i>Добавить вариант ответа</a>',
+                remove: '<a href="#" class="btn btn-default"><i class="fas fa-trash"></i></a>',
+                allow_duplicate: true,
+            }],
+        });
+    </script>
+{% endblock %}
+

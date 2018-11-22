@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/layout.html.twig' %}
+
 
 {% block body %}
     <h1>Poll</h1>
@@ -21,12 +22,21 @@
                 <th>Ownerid</th>
                 <td>{{ poll.ownerId }}</td>
             </tr>
-            <tr>
-                <th>Questions</th>
-                <td>{{ poll.questions }}</td>
-            </tr>
         </tbody>
     </table>
+
+    <div class="row">
+    {% for question in poll.questions %}
+        <div class="col-md">
+            <h3>{{ question.name }}</h3>
+            <ul>
+            {% for item in question.items %}
+                <li>{{ item.text }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    </div>
 
     <ul>
         <li>
