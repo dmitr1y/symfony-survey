@@ -13,10 +13,7 @@
         <hr>
         <div class="row">
             <div class="col">
-                {% form_theme form.questions
-                    '@App/collections/jquery.collection.html.twig'
-                    '@App/collections/advanced.jquery.collection.html.twig' %}
-                {{ form_row(form.questions) }}
+                {#{{ form_row(form.questions) }}#}
             </div>
         </div>
         <hr>
@@ -50,4 +47,9 @@
             }]
         });
     </script>
+{% endblock %}
+
+{% block js_scripts %}
+    <script src="{{ asset('bundles/app/js/jquery.collection.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/add-collection-widget.js') }}"></script>
 {% endblock %}
