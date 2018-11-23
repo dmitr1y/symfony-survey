@@ -66,8 +66,6 @@ class PollController extends Controller
                     $item->setQuestion($question);
                 }
             }
-            dump($poll);
-
 
             $em->persist($poll);
             $em->flush();
@@ -96,8 +94,7 @@ class PollController extends Controller
             $items[] = $question->getQuestionItems();
             $question->getType();
         }
-//        dump($poll->getQuestions()->toArray());
-//        die();
+
         return $this->render('@App/poll/show.html.twig', array(
             'poll' => $poll,
             'delete_form' => $deleteForm->createView(),
