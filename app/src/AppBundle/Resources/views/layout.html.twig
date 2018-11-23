@@ -20,25 +20,30 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills float-right">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('homepage', {'page': 'index'}) }}">Home <span
-                                class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('poll_index', {'page': 'index'}) }}">Tests</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('poll_new', {'page': 'index'}) }}">Create your test</a>
-                </li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('homepage', {'page': 'index'}) }}">Home <span
+                                    class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('poll_index', {'page': 'index'}) }}">Tests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('poll_new', {'page': 'index'}) }}">Create your test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"  href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                {% endif %}
             </ul>
         </nav>
         <h3 class="text-muted">Symfony 2 survey</h3>
     </div>
 
-    {% block body %}
-
-    {% endblock body %}
-
+    {% block body %} {% endblock body %}
 
     <footer class="footer mt-4">
         <p>&copy; Symfony 2 survey 2018</p>
