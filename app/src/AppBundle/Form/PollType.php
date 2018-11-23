@@ -20,8 +20,9 @@ class PollType extends AbstractType
             ->add('questions', CollectionType::class, [
                 'entry_type' => new QuestionsType(),
                 'entry_options' => [
-                    'label' => "Question",
+                    'label' => 'Question',
                 ],
+//                'label'         => 'Add, move, remove values and press Submit.',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,

@@ -1,37 +1,32 @@
 {% extends '@App/layout.html.twig' %}
 
-
 {% block body %}
     <h1>Poll creation</h1>
     {% form_theme form '@App/collections/main.collection.html.twig' %}
     {% form_theme form.questions '@App/collections/questions.collection.html.twig' %}
-    <div class="col col-md">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <div class="row">
-            {{ form_row(form.questions) }}
-        </div>
-
-        {{ form_end(form) }}
-    </div>
-
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.questions) }}
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block js_scripts %}
     <script src="{{ asset('bundles/app/js/jquery.collection.js') }}"></script>
     <script type="text/javascript">
         $('.test_questions').collection({
-            up: '<a href="#" class="btn btn-default"><i class="fas fa-arrow-up"></i></a>',
-            down: '<a href="#" class="btn btn-default"><i class="fas fa-arrow-down"></i></a>',
-            add: '<a href="#" class="btn btn-default"><i class="fas fa-plus"></i>Добавить вопрос</a>',
-            remove: '<a href="#" class="btn btn-default"><i class="fas fa-trash"></i></a>',
+            add: '<a href="#" class="btn btn-info m-1"><i class="fas fa-plus"></i>Add question</a>',
+            remove: '<a href="#" class="btn btn-danger m-1"><i class="fas fa-trash"></i></a>',
             allow_up: false,
-            prefix: 'parent',
             allow_down: false,
+            prefix: 'parent',
             children: [{
                 selector: '.questions_item',
-                add: '<a href="#" class="btn btn-default"><i class="fas fa-plus"></i>Добавить вариант ответа</a>',
-                remove: '<a href="#" class="btn btn-default"><i class="fas fa-trash"></i></a>',
+                prefix: 'child',
+                add: '<a href="#" class="btn btn-info m-1"><i class="fas fa-plus"></i>Add question item</a>',
+                remove: '<a href="#" class="btn btn-danger m-1"><i class="fas fa-trash"></i></a>',
+                duplicate: '<a href="#" class="btn btn-info m-1"><i class="fas fa-copy"></i></a>',
+                allow_up: false,
+                allow_down: false,
                 allow_duplicate: true,
             }],
         });

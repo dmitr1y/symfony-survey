@@ -46,7 +46,11 @@ class PollController extends Controller
     {
         $poll = new Poll();
         $form = $this->createForm('AppBundle\Form\PollType', $poll)
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ]
+            ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
