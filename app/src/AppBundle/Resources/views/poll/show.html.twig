@@ -15,7 +15,7 @@
                         <form class="ml-3">
                             {% for item in question.questionItems %}
                                 <div class="form-group">
-                                    <input type="checkbox" class="form-check-input"
+                                    <input type="{{ question.type.tag }}" class="form-check-input"
                                            id="q{{ question.id }}i{{ item.id }}">
                                     <label class="form-check-label"
                                            for="q{{ question.id }}i{{ item.id }}">{{ item.text }}</label>
