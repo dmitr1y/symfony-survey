@@ -53,12 +53,20 @@ class PollController extends Controller
             $user = $this->container->get('security.context')->getToken()->getUser();
             $poll->setOwnerId($user->getId());
             $em = $this->getDoctrine()->getManager();
-            $em->persist($poll);
-//            dump($poll);
-//            die();
-//            $em->persist($poll->getQuestions());
-            $em->flush();
 
+
+            foreach ($poll->getQuestions() as $question){
+                $question->setQuestion($poll);
+                foreach ($question->getQuestionItems() as $item){
+                    $item->setQuestion($question);
+                }
+            }
+            dump($poll);
+
+
+
+            $em->persist($poll);
+            $em->flush();
             return $this->redirectToRoute('poll_show', array('id' => $poll->getId()));
         }
 
@@ -77,11 +85,12 @@ class PollController extends Controller
     public function showAction(Poll $poll)
     {
         $deleteForm = $this->createDeleteForm($poll);
-        $em = $this->getDoctrine()->getManager();
-        $poll=$em->getRepository(Poll::class)->find($poll);
+//        $em = $this->getDoctrine()->getManager();
+//        $poll=$em->getRepository(Poll::class)->find($poll);
 //        $poll->setQuestions($questions);
 
-        dump($poll);
+//        $questions = $poll->getQuestions();
+        dump($poll->getQuestions());
         die();
         return $this->render('@App/poll/show.html.twig', array(
             'poll' => $poll,

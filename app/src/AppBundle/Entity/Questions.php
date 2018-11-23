@@ -26,7 +26,7 @@ class Questions
     /**
      * @var Poll
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Poll", inversedBy="questions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Poll", inversedBy="questions", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;
@@ -50,7 +50,6 @@ class Questions
      * @var Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ValidAnswer", mappedBy="question", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="valid_id", referencedColumnName="id")
      */
     private $validAnswer;
 
@@ -58,7 +57,6 @@ class Questions
      * @var Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionItems", mappedBy="question", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="items_id", referencedColumnName="id")
      */
     private $questionItems;
 

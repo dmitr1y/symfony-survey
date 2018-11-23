@@ -27,7 +27,7 @@ class ValidAnswer
      * @var Collection
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="validAnswer")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="questions_id", referencedColumnName="id")
      */
     private $question;
 

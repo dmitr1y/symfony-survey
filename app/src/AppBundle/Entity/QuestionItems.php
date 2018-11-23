@@ -25,8 +25,8 @@ class QuestionItems
     /**
      * @var Questions
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="questionItems", cascade={"persist"})
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="questionItems", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="questions_id", referencedColumnName="id")
      */
     private $question;
 
@@ -65,7 +65,7 @@ class QuestionItems
     /**
      * Get question
      *
-     * @return Question
+     * @return Questions
      */
     public function getQuestion()
     {

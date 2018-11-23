@@ -53,7 +53,7 @@ class QuestionTypes
      * @param $questionId
      * @return QuestionTypes
      */
-    public function setQuestionid($questionId){
+    public function setQuestionId($questionId){
         $this->questionId=$questionId;
         return $this;
     }

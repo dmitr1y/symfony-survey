@@ -28,7 +28,7 @@
     <div class="row">
     {% for question in poll.questions %}
         <div class="col-md">
-            <h3>{{ question.name }}</h3>
+            <h3>{{ question.text }}</h3>
             <ul>
             {% for item in question.items %}
                 <li>{{ item.text }}</li>

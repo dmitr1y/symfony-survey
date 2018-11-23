@@ -48,7 +48,7 @@ class Poll
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="question", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="question", cascade={"persist", "remove"})
      */
     private $questions;
 
