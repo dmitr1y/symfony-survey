@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * UserAnswers
@@ -22,7 +23,10 @@ class UserAnswers
     private $id;
 
     /**
+     * @var Collection
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ValidAnswer", inversedBy="id")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $validAnswer;
 
@@ -92,4 +96,3 @@ class UserAnswers
         return $this->userAnswer;
     }
 }
-

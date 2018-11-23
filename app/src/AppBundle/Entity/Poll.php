@@ -46,8 +46,9 @@ class Poll
     private $ownerId;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="question", cascade={"persist", "remove"})
-     *  @ORM\JoinColumn(name="questions", referencedColumnName="id")
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="question", cascade={"persist"})
      */
     private $questions;
 
@@ -163,5 +164,28 @@ class Poll
     {
         return $this->questions;
     }
-}
 
+    /**
+     * Add question
+     *
+     * @param \AppBundle\Entity\Questions $question
+     *
+     * @return Poll
+     */
+    public function addQuestion(\AppBundle\Entity\Questions $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \AppBundle\Entity\Questions $question
+     */
+    public function removeQuestion(\AppBundle\Entity\Questions $question)
+    {
+        $this->questions->removeElement($question);
+    }
+}

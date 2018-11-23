@@ -36,6 +36,8 @@ class QuestionTypes
     private $tag;
 
     /**
+     * @var Questions
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Questions", mappedBy="type")
      */
     private $questionId;
@@ -112,5 +114,35 @@ class QuestionTypes
     {
         return $this->tag;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questionId = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add questionId
+     *
+     * @param \AppBundle\Entity\Questions $questionId
+     *
+     * @return QuestionTypes
+     */
+    public function addQuestionId(\AppBundle\Entity\Questions $questionId)
+    {
+        $this->questionId[] = $questionId;
+
+        return $this;
+    }
+
+    /**
+     * Remove questionId
+     *
+     * @param \AppBundle\Entity\Questions $questionId
+     */
+    public function removeQuestionId(\AppBundle\Entity\Questions $questionId)
+    {
+        $this->questionId->removeElement($questionId);
+    }
+}

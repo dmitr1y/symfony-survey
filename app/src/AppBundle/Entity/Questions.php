@@ -24,12 +24,18 @@ class Questions
     private $id;
 
     /**
+     * @var Poll
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Poll", inversedBy="questions", cascade={"persist"})
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;
 
     /**
+     * @var QuestionTypes
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuestionTypes", inversedBy="questionId", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
 
@@ -41,12 +47,18 @@ class Questions
     private $text;
 
     /**
+     * @var Collection
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ValidAnswer", mappedBy="question", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="valid_id", referencedColumnName="id")
      */
     private $validAnswer;
 
     /**
+     * @var Collection
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\QuestionItems", mappedBy="question", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="items_id", referencedColumnName="id")
      */
     private $questionItems;
 
@@ -59,7 +71,7 @@ class Questions
     /**
      * Get question
      *
-     * @return Collection
+     * @return Poll
      */
     public function getQuestion()
     {
@@ -183,5 +195,52 @@ class Questions
     {
         return $this->questionItems;
     }
-}
 
+    /**
+     * Add validAnswer
+     *
+     * @param \AppBundle\Entity\ValidAnswer $validAnswer
+     *
+     * @return Questions
+     */
+    public function addValidAnswer(\AppBundle\Entity\ValidAnswer $validAnswer)
+    {
+        $this->validAnswer[] = $validAnswer;
+
+        return $this;
+    }
+
+    /**
+     * Remove validAnswer
+     *
+     * @param \AppBundle\Entity\ValidAnswer $validAnswer
+     */
+    public function removeValidAnswer(\AppBundle\Entity\ValidAnswer $validAnswer)
+    {
+        $this->validAnswer->removeElement($validAnswer);
+    }
+
+    /**
+     * Add questionItem
+     *
+     * @param \AppBundle\Entity\QuestionItems $questionItem
+     *
+     * @return Questions
+     */
+    public function addQuestionItem(\AppBundle\Entity\QuestionItems $questionItem)
+    {
+        $this->questionItems[] = $questionItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove questionItem
+     *
+     * @param \AppBundle\Entity\QuestionItems $questionItem
+     */
+    public function removeQuestionItem(\AppBundle\Entity\QuestionItems $questionItem)
+    {
+        $this->questionItems->removeElement($questionItem);
+    }
+}

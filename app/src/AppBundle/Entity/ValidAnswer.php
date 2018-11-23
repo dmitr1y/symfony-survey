@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Proxies\__CG__\AppBundle\Entity\Question;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * ValidAnswer
@@ -23,7 +24,10 @@ class ValidAnswer
     private $id;
 
     /**
+     * @var Collection
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="validAnswer")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $question;
 
@@ -93,4 +97,3 @@ class ValidAnswer
         return $this->text;
     }
 }
-

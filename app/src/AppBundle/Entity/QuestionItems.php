@@ -23,7 +23,10 @@ class QuestionItems
     private $id;
 
     /**
+     * @var Questions
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Questions", inversedBy="questionItems", cascade={"persist"})
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $question;
 
@@ -93,4 +96,3 @@ class QuestionItems
         return $this->text;
     }
 }
-
