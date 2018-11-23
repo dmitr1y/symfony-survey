@@ -49,6 +49,16 @@ class QuestionItems
     }
 
     /**
+     * Get question
+     *
+     * @return Questions
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
      * Set question
      *
      * @param Question $question
@@ -63,13 +73,13 @@ class QuestionItems
     }
 
     /**
-     * Get question
+     * Get text
      *
-     * @return Questions
+     * @return string
      */
-    public function getQuestion()
+    public function getText()
     {
-        return $this->question;
+        return $this->text;
     }
 
     /**
@@ -84,15 +94,5 @@ class QuestionItems
         $this->text = $text;
 
         return $this;
-    }
-
-    /**
-     * Get text
-     *
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->text;
     }
 }

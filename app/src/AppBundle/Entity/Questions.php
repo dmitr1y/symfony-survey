@@ -99,6 +99,16 @@ class Questions
     }
 
     /**
+     * Get type
+     *
+     * @return QuestionTypes
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * Set type
      *
      * @param QuestionTypes $type
@@ -113,13 +123,13 @@ class Questions
     }
 
     /**
-     * Get type
+     * Get text
      *
-     * @return QuestionTypes
+     * @return string
      */
-    public function getType()
+    public function getText()
     {
-        return $this->type;
+        return $this->text;
     }
 
     /**
@@ -137,13 +147,13 @@ class Questions
     }
 
     /**
-     * Get text
+     * Get validAnswer
      *
-     * @return string
+     * @return ArrayCollection
      */
-    public function getText()
+    public function getValidAnswer()
     {
-        return $this->text;
+        return $this->validAnswer;
     }
 
     /**
@@ -161,13 +171,13 @@ class Questions
     }
 
     /**
-     * Get validAnswer
+     * Get questionItems
      *
      * @return ArrayCollection
      */
-    public function getValidAnswer()
+    public function getQuestionItems()
     {
-        return $this->validAnswer;
+        return $this->questionItems;
     }
 
     /**
@@ -182,16 +192,6 @@ class Questions
         $this->questionItems = $questionItems;
 
         return $this;
-    }
-
-    /**
-     * Get questionItems
-     *
-     * @return ArrayCollection
-     */
-    public function getQuestionItems()
-    {
-        return $this->questionItems;
     }
 
     /**

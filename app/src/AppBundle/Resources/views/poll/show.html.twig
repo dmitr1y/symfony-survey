@@ -1,54 +1,42 @@
 {% extends '@App/layout.html.twig' %}
 
+{% block title %} Tests - {{ poll.name }} {% endblock %}
 
 {% block body %}
-    <h1>Poll</h1>
-
-    <table>
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ poll.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ poll.name }}</td>
-        </tr>
-        <tr>
-            <th>Createdat</th>
-            <td>{% if poll.createdAt %}{{ poll.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Ownerid</th>
-            <td>{{ poll.ownerId }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <h1>{{ poll.name }}</h1>
     <hr>
-    <div class="container">
+    <div class="row">
         {% for question in poll.questions %}
-            <div class="col-md">
-                <h3>{{ question.text }}</h3>
-                <ul>
-                    {% for item in question.questionItems %}
-                        <li>{{ item.text }}</li>
-                    {% endfor %}
-                </ul>
+            <div class="col-sm-6 mt-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ question.text }}</h4>
+                        <hr>
+                        <form class="ml-3">
+                            {% for item in question.questionItems %}
+                                <div class="form-group">
+                                    <input type="checkbox" class="form-check-input"
+                                           id="q{{ question.id }}i{{ item.id }}">
+                                    <label class="form-check-label"
+                                           for="q{{ question.id }}i{{ item.id }}">{{ item.text }}</label>
+                                </div>
+                            {% endfor %}
+                        </form>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
     <hr>
-    <ul>
-        <li>
-            <a href="{{ path('poll_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('poll_edit', { 'id': poll.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="form-group mt-4 ">
+    </div>
+    <div class="form-group">
+        <button onclick='location.href="{{ path('poll_edit', { 'id': poll.id }) }}"' class="btn btn-info"><i
+                    class="fas fa-edit"></i></button>
+        <button type="submit" class="btn btn-info">Submit</button>
+        {#{{ form_start(delete_form) }}#}
+        {#<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>#}
+        {#{{ form_end(delete_form) }}#}
+    </div>
+
 {% endblock %}

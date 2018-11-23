@@ -1,44 +1,29 @@
 {% extends '@App/layout.html.twig' %}
 
+{% block title %}
+    Available tests
+{% endblock title %}
 
 {% block body %}
-    <h1>Polls list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Createdat</th>
-                <th>Ownerid</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h1>Available tests</h1>
+    <div class="row">
         {% for poll in polls %}
-            <tr>
-                <td><a href="{{ path('poll_show', { 'id': poll.id }) }}">{{ poll.id }}</a></td>
-                <td>{{ poll.name }}</td>
-                <td>{% if poll.createdAt %}{{ poll.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ poll.ownerId }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('poll_show', { 'id': poll.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('poll_edit', { 'id': poll.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <div class="col-sm-6 mt-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ poll.name }}
+                        </h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam egestas leo ut
+                            neque dignissim, eu hendrerit elit aliquam.</p>
+                        <div class="form-group">
+                            <a href="{{ path('poll_show', { 'id': poll.id }) }}" class="btn btn-primary">Lets start</a>
+                            <a href="{{ path('poll_edit', { 'id': poll.id }) }}"><i class="fas fa-edit"></i> </a>
+                        </div>
+                        <small>{% if poll.createdAt %}{{ poll.createdAt|date('Y-m-d') }}{% endif %}</small>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('poll_new') }}">Create a new poll</a>
-        </li>
-    </ul>
+    </div>
 {% endblock %}

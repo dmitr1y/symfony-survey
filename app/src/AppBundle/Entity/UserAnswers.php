@@ -49,6 +49,16 @@ class UserAnswers
     }
 
     /**
+     * Get validAnswer
+     *
+     * @return ValidAnswer
+     */
+    public function getValidAnswer()
+    {
+        return $this->validAnswer;
+    }
+
+    /**
      * Set validAnswer
      *
      * @param ValidAnswer $validAnswer
@@ -63,13 +73,13 @@ class UserAnswers
     }
 
     /**
-     * Get validAnswer
+     * Get userAnswer
      *
-     * @return ValidAnswer
+     * @return string
      */
-    public function getValidAnswer()
+    public function getUserAnswer()
     {
-        return $this->validAnswer;
+        return $this->userAnswer;
     }
 
     /**
@@ -84,15 +94,5 @@ class UserAnswers
         $this->userAnswer = $userAnswer;
 
         return $this;
-    }
-
-    /**
-     * Get userAnswer
-     *
-     * @return string
-     */
-    public function getUserAnswer()
-    {
-        return $this->userAnswer;
     }
 }

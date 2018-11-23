@@ -6,61 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/narrow-jumbotron.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('bundles/app/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/app/css/brands.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/app/css/solid.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Symfony 2 survey{% endblock %}</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('homepage', {'page': 'index'}) }}">Home <span
+                                class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('poll_index', {'page': 'index'}) }}">Tests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('poll_new', {'page': 'index'}) }}">Create your test</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Symfony 2 survey</h3>
     </div>
-</nav>
 
-<main role="main" class="container">
     {% block body %}
 
-    {% endblock %}
-</main>
+    {% endblock body %}
+
+
+    <footer class="footer mt-4">
+        <p>&copy; Symfony 2 survey 2018</p>
+    </footer>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ asset('bundles/app/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('bundles/app/js/popper.js') }}"></script>
 <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
- <!-- Font Awesome -->
+<!-- Font Awesome -->
 <script src="{{ asset('bundles/app/js/all.js') }}"></script>
 <script src="{{ asset('bundles/app/js/brands.js') }}"></script>
 <script src="{{ asset('bundles/app/js/solid.js') }}"></script>

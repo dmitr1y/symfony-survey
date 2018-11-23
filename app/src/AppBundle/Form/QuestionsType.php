@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\QuestionTypes;
-use AppBundle\Repository\QuestionTypesRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -24,7 +23,7 @@ class QuestionsType extends AbstractType
                 'property' => 'name',
             ])
             ->add('questionItems', CollectionType::class, [
-                'entry_type' =>QuestionItemsType::class,
+                'entry_type' => QuestionItemsType::class,
                 'entry_options' => array('label' => "-> Question item"),
                 'allow_add' => true,
                 'prototype_name' => '__children_name__',

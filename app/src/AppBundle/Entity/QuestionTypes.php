@@ -43,9 +43,18 @@ class QuestionTypes
     private $questionId;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questionId = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * @return Questions
      */
-    public function getQuestionId(){
+    public function getQuestionId()
+    {
         return $this->questionId;
     }
 
@@ -53,10 +62,12 @@ class QuestionTypes
      * @param $questionId
      * @return QuestionTypes
      */
-    public function setQuestionId($questionId){
-        $this->questionId=$questionId;
+    public function setQuestionId($questionId)
+    {
+        $this->questionId = $questionId;
         return $this;
     }
+
     /**
      * Get id
      *
@@ -65,6 +76,16 @@ class QuestionTypes
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -82,13 +103,13 @@ class QuestionTypes
     }
 
     /**
-     * Get name
+     * Get tag
      *
      * @return string
      */
-    public function getName()
+    public function getTag()
     {
-        return $this->name;
+        return $this->tag;
     }
 
     /**
@@ -103,23 +124,6 @@ class QuestionTypes
         $this->tag = $tag;
 
         return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->questionId = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -30,8 +30,7 @@ class PollType extends AbstractType
                 'attr' => [
                     'class' => 'test_questions',
                 ],
-            ])
-            ->add('submit', SubmitType::class);
+            ]);
     }
 
     /**

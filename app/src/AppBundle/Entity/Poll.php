@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Collection;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Poll
@@ -56,7 +55,7 @@ class Poll
     public function __construct()
     {
         $this->questions = new ArrayCollection();
-        $this->createdAt= new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -67,6 +66,16 @@ class Poll
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -84,13 +93,13 @@ class Poll
     }
 
     /**
-     * Get name
+     * Get createdAt
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getName()
+    public function getCreatedAt()
     {
-        return $this->name;
+        return $this->createdAt;
     }
 
     /**
@@ -108,13 +117,13 @@ class Poll
     }
 
     /**
-     * Get createdAt
+     * Get ownerId
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getCreatedAt()
+    public function getOwnerId()
     {
-        return $this->createdAt;
+        return $this->ownerId;
     }
 
     /**
@@ -132,13 +141,13 @@ class Poll
     }
 
     /**
-     * Get ownerId
+     * Get questions
      *
-     * @return int
+     * @return ArrayCollection
      */
-    public function getOwnerId()
+    public function getQuestions()
     {
-        return $this->ownerId;
+        return $this->questions;
     }
 
     /**
@@ -153,16 +162,6 @@ class Poll
         $this->questions = $questions;
 
         return $this;
-    }
-
-    /**
-     * Get questions
-     *
-     * @return ArrayCollection
-     */
-    public function getQuestions()
-    {
-        return $this->questions;
     }
 
     /**

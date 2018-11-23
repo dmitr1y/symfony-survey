@@ -3,11 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Poll;
-use AppBundle\Entity\Questions;
-use AppBundle\Repository\QuestionsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -45,7 +45,8 @@ class PollController extends Controller
     public function newAction(Request $request)
     {
         $poll = new Poll();
-        $form = $this->createForm('AppBundle\Form\PollType', $poll);
+        $form = $this->createForm('AppBundle\Form\PollType', $poll)
+            ->add('submit', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -55,14 +56,13 @@ class PollController extends Controller
             $em = $this->getDoctrine()->getManager();
 
 
-            foreach ($poll->getQuestions() as $question){
+            foreach ($poll->getQuestions() as $question) {
                 $question->setQuestion($poll);
-                foreach ($question->getQuestionItems() as $item){
+                foreach ($question->getQuestionItems() as $item) {
                     $item->setQuestion($question);
                 }
             }
             dump($poll);
-
 
 
             $em->persist($poll);
@@ -87,8 +87,8 @@ class PollController extends Controller
         $deleteForm = $this->createDeleteForm($poll);
 
         $questions = $poll->getQuestions();
-        $items=[];
-        foreach ($questions as  $question) {
+        $items = [];
+        foreach ($questions as $question) {
             $items[] = $question->getQuestionItems();
             $question->getType();
         }
@@ -98,6 +98,21 @@ class PollController extends Controller
             'poll' => $poll,
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Creates a form to delete a poll entity.
+     *
+     * @param Poll $poll The poll entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Poll $poll)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('poll_delete', array('id' => $poll->getId())))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 
     /**
@@ -133,6 +148,7 @@ class PollController extends Controller
      */
     public function deleteAction(Request $request, Poll $poll)
     {
+        return new ForbiddenOverwriteException();
         $form = $this->createDeleteForm($poll);
         $form->handleRequest($request);
 
@@ -143,20 +159,5 @@ class PollController extends Controller
         }
 
         return $this->redirectToRoute('poll_index');
-    }
-
-    /**
-     * Creates a form to delete a poll entity.
-     *
-     * @param Poll $poll The poll entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Poll $poll)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('poll_delete', array('id' => $poll->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

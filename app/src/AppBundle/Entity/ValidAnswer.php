@@ -50,6 +50,16 @@ class ValidAnswer
     }
 
     /**
+     * Get question
+     *
+     * @return Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
      * Set question
      *
      * @param Question $question
@@ -64,13 +74,13 @@ class ValidAnswer
     }
 
     /**
-     * Get question
+     * Get text
      *
-     * @return Question
+     * @return string
      */
-    public function getQuestion()
+    public function getText()
     {
-        return $this->question;
+        return $this->text;
     }
 
     /**
@@ -85,15 +95,5 @@ class ValidAnswer
         $this->text = $text;
 
         return $this;
-    }
-
-    /**
-     * Get text
-     *
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->text;
     }
 }

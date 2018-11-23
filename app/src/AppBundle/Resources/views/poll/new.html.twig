@@ -3,8 +3,8 @@
 
 {% block body %}
     <h1>Poll creation</h1>
-    {% form_theme form '@App/collections/main.collection.html.twig'%}
-    {% form_theme form.questions '@App/collections/questions.collection.html.twig'%}
+    {% form_theme form '@App/collections/main.collection.html.twig' %}
+    {% form_theme form.questions '@App/collections/questions.collection.html.twig' %}
     <div class="col col-md">
         {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -14,11 +14,6 @@
 
         {{ form_end(form) }}
     </div>
-    <ul>
-        <li>
-            <a href="{{ path('poll_index') }}">Back to the list</a>
-        </li>
-    </ul>
 
 {% endblock %}
 
