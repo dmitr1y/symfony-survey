@@ -85,13 +85,15 @@ class PollController extends Controller
     public function showAction(Poll $poll)
     {
         $deleteForm = $this->createDeleteForm($poll);
-//        $em = $this->getDoctrine()->getManager();
-//        $poll=$em->getRepository(Poll::class)->find($poll);
-//        $poll->setQuestions($questions);
 
-//        $questions = $poll->getQuestions();
-        dump($poll->getQuestions());
-        die();
+        $questions = $poll->getQuestions();
+        $items=[];
+        foreach ($questions as  $question) {
+            $items[] = $question->getQuestionItems();
+            $question->getType();
+        }
+//        dump($poll->getQuestions()->toArray());
+//        die();
         return $this->render('@App/poll/show.html.twig', array(
             'poll' => $poll,
             'delete_form' => $deleteForm->createView(),

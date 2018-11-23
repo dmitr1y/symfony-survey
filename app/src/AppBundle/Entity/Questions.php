@@ -101,7 +101,7 @@ class Questions
     /**
      * Set type
      *
-     * @param string $type
+     * @param QuestionTypes $type
      *
      * @return Questions
      */
@@ -115,7 +115,7 @@ class Questions
     /**
      * Get type
      *
-     * @return string
+     * @return QuestionTypes
      */
     public function getType()
     {
